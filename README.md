@@ -27,6 +27,29 @@ This demo uses the **20 Newsgroups dataset**, a publicly available corpus that c
 - `talk.politics.guns` - Gun politics debates
 - `sci.space` - Space exploration and astronomy
 
+## Requirements
+
+Install the required dependencies:
+
+```bash
+pip install numpy pandas plotnine scikit-learn jupyter
+```
+
+**Key Libraries:**
+- `plotnine`: Grammar of Graphics visualization library (Python implementation of ggplot2)
+- `scikit-learn`: Machine learning tools, including LDA and the 20 Newsgroups dataset
+- `numpy` and `pandas`: Data manipulation and numerical computing
+
+## Usage
+
+Run the Jupyter notebook:
+
+```bash
+jupyter notebook topic_modeling_demo.ipynb
+```
+
+Execute cells sequentially to see topic modeling in action.
+
 ## Walkthrough
 
 ### Step 1: Load and Explore Data
