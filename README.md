@@ -1,109 +1,63 @@
 # NLP Topic Modeling Demo
 
-A brief demo of topic modeling using Latent Dirichlet Allocation (LDA) on the 20 Newsgroups dataset.
-
 ## Overview
 
-This project showcases how **topic modeling** works in Natural Language Processing. Topic modeling is an unsupervised machine learning technique that automatically discovers abstract "topics" within a collection of documents.
+This project demonstrates how **topic modeling** works in Natural Language Processing (NLP). Topic modeling algorithms like **Latent Dirichlet Allocation (LDA)** analyze a text corpus. Topic modeling is an unsupervised ML technique, meaning it does not require labeled training data. Rather, the algorithm discovers topics based on statistical patterns of word co-occurrences.
 
-## What is Topic Modeling?
-
-Topic modeling algorithms analyze a corpus of text documents to identify patterns of word co-occurrence and group them into interpretable themes or "topics." Unlike supervised learning, topic modeling doesn't require labeled training data. Rather, it discovers topics purely from the statistical patterns in the text.
-
-### Key Concepts:
+### Key Concepts
 
 - **Document**: A piece of text (article, email, post, etc.)
 - **Corpus**: A collection of documents
 - **Topic**: A distribution over words that frequently co-occur
-- **LDA (Latent Dirichlet Allocation)**: A popular topic modeling algorithm
+- **LDA (Latent Dirichlet Allocation)**: A popular topic modeling algorithm; Each topic is a mixture of words and each document is a mixture of topics
 
 ## Dataset
 
-This demo uses the **20 Newsgroups dataset**, a publicly available corpus that contains approximately 20,000 newsgroup documents partitioned across 20 different categories. This demo uses 5 categories:
+This demo uses the **20 Newsgroups dataset**, a publicly available corpus of ~20,000 newsgroup documents across 20 different categories. For simplicity, this demo uses 3 categories:
 
 - `rec.sport.baseball` - Baseball discussions
-- `sci.med` - Medical science topics
-- `comp.graphics` - Computer graphics
 - `talk.politics.guns` - Gun politics debates
 - `sci.space` - Space exploration and astronomy
 
-## Requirements
+## Method
 
-Install the required dependencies:
+### Step 1: Load Data
 
-```bash
-pip install numpy pandas plotnine scikit-learn jupyter
-```
-
-**Key Libraries:**
-- `plotnine`: Grammar of Graphics visualization library (Python implementation of ggplot2)
-- `scikit-learn`: Machine learning tools, including LDA and the 20 Newsgroups dataset
-- `numpy` and `pandas`: Data manipulation and numerical computing
-
-## Usage
-
-Run the Jupyter notebook:
-
-```bash
-jupyter notebook topic_modeling_demo.ipynb
-```
-
-Execute cells sequentially to see topic modeling in action.
-
-## Walkthrough
-
-### Step 1: Load and Explore Data
-
-The notebook begins by importing necessary libraries and loading the 20 Newsgroups dataset. We remove headers, footers, and quotes to focus on the core content of each document.
+- Import libraries and load the sklearn 20 Newsgroups dataset.
+- Remove headers, footers, and quotes.
 
 ### Step 2: Text Preprocessing
 
-Before modeling, we transform raw text into a numerical representation:
+Transform raw text into a numerical representation:
 
-1. **Tokenization**: Split text into individual words
-2. **Lowercasing**: Convert all text to lowercase
-3. **Stop word removal**: Remove common words like "the," "and," "is"
-4. **Filtering**: Remove very rare and very common terms
-5. **Vectorization**: Create a document-term matrix
+- **Tokenization**: Split text into individual words
+- **Lowercasing**: Convert all text to lowercase
+- **Stop word removal**: Remove common words like "the"
+- **Filtering**: Remove very rare and very common terms
+- **Vectorization**: Create a document-term matrix
 
-**Why CountVectorizer?** LDA expects word counts (not TF-IDF weights), as it models the generative process of how documents are created.
+**Note:** Use CountVectorizer because LDA expects word counts (not TF-IDF weights).
 
 ### Step 3: Build and Train the LDA Model
 
-We initialize an LDA model specifying the number of topics we want to discover. The model learns:
-- Which words belong to which topics
-- Which topics appear in which documents
-
-**Output shape:** `(n_documents, n_topics)` - each document represented as a probability distribution over topics.
+- Initialize an LDA model specifying the number of topics to discover (3, for this demo).
+- The model learns which words belong to which topics and which topics appear in which documents.
+- Each document is represented as a probability distribution over topics.
 
 ### Step 4: Examine Discovered Topics
 
-Each topic is characterized by its top words. By examining these words, we can interpret what each topic represents.
-
-**Example output:**
-```
-Topic 1: game team baseball season players year games hit runs ball
-Topic 2: space nasa launch orbit shuttle mission earth moon satellite data
-Topic 3: gun guns people crime weapons law firearms government control police
-```
-
-The model discovers coherent, interpretable topics even though it never saw the category labels!
+- The model discovers topics within the corpus, but it does not name those topics. Topics can be quite abstract.
+- By checking the top words for each topic, we can figure out a coherent name for each topic.
+- For example, if the topic's top words are like "game, hit, team, baseball..." then we might call the topic "baseball."
+- In this demo, you can see that LDA discovers the 3 topics (baseball, guns, space) even though it never saw those category labels. Neat!
 
 ### Step 5: Visualize Topic Distributions
 
-We create visualizations to understand:
-- How topics are distributed across documents (heatmap)
-- Which topic is most dominant across the corpus (bar chart)
-- How individual documents map to multiple topics
+- Use a heatmap to visualize how topics are distributed across documents.
+- Some documents are mostly a single topic (less ambiguous) and others are a mixture of topics (more ambiguous).
 
-**Insights:**
-- Some documents are dominated by a single topic (high certainty)
-- Other documents are mixtures of multiple topics (more ambiguous)
+### Next Steps:
 
-### Step 6: Analyze Sample Documents
-
-We examine specific documents and their topic distributions to verify that the model is making sensible assignments. This helps validate that discovered topics align with document content.
-
-### Step 7: Visualize Word Importance
-
-Bar charts show the relative importance of top words within each topic, helping understand topic coherence and quality.
+- Experiment with different preprocessing approaches, like *lemmatization* (treating "game" and "games" both as "game").
+- Compare LDS with another topic modeling algorithm, like LSA (Latent Semantic Analysis).
+- Evaluate model quality with perplexity and coherence scores. (This is advanced stuff that will take more research to learn!)
