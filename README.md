@@ -55,9 +55,3 @@ Transform raw text into a numerical representation:
 
 - Use a heatmap to visualize how topics are distributed across documents.
 - Some documents are mostly a single topic (less ambiguous) and others are a mixture of topics (more ambiguous).
-
-### Next Steps:
-
-- Experiment with different preprocessing approaches, like *lemmatization* (treating "game" and "games" both as "game").
-- Compare LDS with another topic modeling algorithm, like LSA (Latent Semantic Analysis).
-- Evaluate model quality with perplexity and coherence scores. (This is advanced stuff that will take more research to learn!)
